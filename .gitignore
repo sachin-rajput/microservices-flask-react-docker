@@ -1,2 +1,5 @@
 __pycache__
 env
+
+# Code Cov
+htmlcov
