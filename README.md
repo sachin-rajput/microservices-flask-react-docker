@@ -33,7 +33,7 @@ $ source env/bin/activate
 
 ```
 
-#### Common Commands#
+#### Common Commands
 
 ```
 Build the images:
