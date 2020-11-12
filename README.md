@@ -37,19 +37,19 @@ $ source env/bin/activate
 
 ```
 Build the images:
-\$ docker-compose build
+$ docker-compose build
 
 Run the containers:
-\$ docker-compose up -d
+$ docker-compose up -d
 
 Create the database:
-\$ docker-compose exec users python manage.py recreate_db
+$ docker-compose exec users python manage.py recreate_db
 
 Seed the database:
-\$ docker-compose exec users python manage.py seed_db
+$ docker-compose exec users python manage.py seed_db
 
 Run the tests:
-\$ docker-compose exec users python manage.py test
+$ docker-compose exec users python manage.py test
 
 ```
 
@@ -57,20 +57,20 @@ Run the tests:
 
 ```
 To stop the containers:
-\$ docker-compose stop
+$ docker-compose stop
 
 To bring down the containers:
-\$ docker-compose down
+$ docker-compose down
 
 Want to force a build?
-\$ docker-compose build --no-cache
+$ docker-compose build --no-cache
 
 Remove images:
 $ docker rmi $(docker images -q)
 
 Postgres
 Want to access the database via psql?
-\$ docker-compose exec users-db psql -U postgres
+$ docker-compose exec users-db psql -U postgres
 
 Then, you can connect to the database and run SQL queries. For example:
 
