@@ -79,3 +79,5 @@ Then, you can connect to the database and run SQL queries. For example:
 # select \* from users;
 
 ```
+
+Added Travis
