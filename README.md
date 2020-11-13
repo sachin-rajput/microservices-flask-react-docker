@@ -81,3 +81,21 @@ Then, you can connect to the database and run SQL queries. For example:
 # select \* from users;
 
 ```
+
+#### Docker commands
+
+```
+docker-machine stop testdriven-prod
+```
+
+```
+docker-machine start testdriven-prod
+docker-machine regenerate-certs -f testdriven-prod
+```
+
+```
+docker-machine env testdriven-prod
+eval $(docker-machine env testdriven-prod)
+export REACT_APP_USERS_SERVICE_URL=http://DOCKER_MACHINE_IP
+docker-compose -f docker-compose-prod.yml up -d --build
+```
