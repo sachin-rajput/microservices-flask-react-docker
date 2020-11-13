@@ -1,5 +1,5 @@
 # base image
-FROM node:11.12.0-alpine
+FROM node:14.15.0-alpine
 
 # set working directory
 WORKDIR /usr/src/app
@@ -11,7 +11,7 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 COPY package.json /usr/src/app/package.json
 COPY package-lock.json /usr/src/app/package-lock.json
 RUN npm ci
-RUN npm install react-scripts -g --silent
+RUN npm install react-scripts -g
 
 # start app
 CMD ["npm", "start"]
