@@ -1,5 +1,7 @@
 # Microservices with Docker, Flask, and React
 
+[![Build Status](https://travis-ci.com/github/sachin-rajput/microservices-flask-react-docker.svg?branch=main)](https://travis-ci.com/github/sachin-rajput/microservices-flask-react-docker)
+
 ---
 
 ### To install Flask and Flask restful
