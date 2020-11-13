@@ -1,6 +1,6 @@
 # Microservices with Docker, Flask, and React
 
-[![Build Status](https://travis-ci.com/github/sachin-rajput/microservices-flask-react-docker.svg?branch=main)](https://travis-ci.com/github/sachin-rajput/microservices-flask-react-docker)
+[![Build Status](https://travis-ci.com/sachin-rajput/microservices-flask-react-docker.svg?branch=main)](https://travis-ci.com/github/sachin-rajput/microservices-flask-react-docker)
 
 ---
 
