@@ -5,3 +5,5 @@ Dockerfile-prod
 
 # Code Cov
 htmlcov
+
+migrations
