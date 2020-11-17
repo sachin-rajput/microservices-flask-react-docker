@@ -35,9 +35,11 @@ const NavBar = (props) => (
           <Link to="/about" className="navbar-item">
             About
           </Link>
-          <Link to="/status" className="navbar-item">
-            User Status
-          </Link>
+          {props.isAuthenticated && (
+            <Link to="/status" className="navbar-item">
+              User Status
+            </Link>
+          )}
         </div>
         <div className="navbar-end">
           {!props.isAuthenticated && (
@@ -50,9 +52,11 @@ const NavBar = (props) => (
               Log In
             </Link>
           )}
-          <Link to="/logout" className="navbar-item">
-            Log Out
-          </Link>
+          {props.isAuthenticated && (
+            <Link to="/logout" className="navbar-item">
+              Log Out
+            </Link>
+          )}
         </div>
       </div>
     </section>

@@ -12,6 +12,7 @@ import About from './components/About'
 import NavBar from './components/NavBar'
 import Form from './components/Form'
 import Logout from './components/Logout'
+import UserStatus from './components/UserStatus'
 
 class App extends Component {
   constructor() {
@@ -185,6 +186,15 @@ class App extends Component {
                     render={() => (
                       <Logout
                         logoutUser={this.logoutUser}
+                        isAuthenticated={this.state.isAuthenticated}
+                      />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/status"
+                    render={() => (
+                      <UserStatus
                         isAuthenticated={this.state.isAuthenticated}
                       />
                     )}
