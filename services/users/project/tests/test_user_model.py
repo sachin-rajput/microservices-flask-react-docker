@@ -26,6 +26,7 @@ class TestUserModel(BaseTestCase):
         self.assertEqual(user.email, 'test@test.com')
         self.assertTrue(user.active)
         self.assertTrue(user.password)
+        self.assertFalse(user.admin)  # new
 
     def test_add_user_duplicate_username(self):
         user = User(
