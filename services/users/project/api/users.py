@@ -35,7 +35,7 @@ class UsersList(Resource):
             'message': 'Invalid payload.'
         }
         if not is_admin(resp):
-            response_object['message'] = 'You do not have permission to do that.'
+            response_object['message'] = 'Insufficient permissions.'
             return response_object, 401
         if not post_data:
             return response_object, 400
@@ -64,7 +64,7 @@ class UsersList(Resource):
 
 
 class Users(Resource):
-    
+
     def get(self, user_id):
         """Get single user details"""
         response_object = {

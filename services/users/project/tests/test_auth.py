@@ -269,7 +269,7 @@ class TestAuthBlueprint(BaseTestCase):
             token = json.loads(resp_login.data.decode())['auth_token']
             response = self.client.get(
                 '/auth/logout',
-                headers={'Authorization' : f'Bearer {token}'}
+                headers={'Authorization': f'Bearer {token}'}
             )
             data = json.loads(response.data.decode())
             self.assertTrue(data['status'] == 'fail')

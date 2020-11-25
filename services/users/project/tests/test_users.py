@@ -333,5 +333,6 @@ class TestUserService(BaseTestCase):
                 data['message'] == 'You do not have permission to do that.')
             self.assertEqual(response.status_code, 401)
 
+
 if __name__ == '__main__':
     unittest.main()
