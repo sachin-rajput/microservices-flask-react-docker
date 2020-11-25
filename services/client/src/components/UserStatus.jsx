@@ -10,7 +10,9 @@ class UserStatus extends Component {
     this.state = {
       email: '',
       id: '',
-      username: ''
+      username: '',
+      active: '', // new
+      admin: '' // new
     }
   }
   componentDidMount() {
@@ -33,7 +35,9 @@ class UserStatus extends Component {
         this.setState({
           email: res.data.data.email,
           id: res.data.data.id,
-          username: res.data.data.username
+          username: res.data.data.username,
+          active: String(res.data.data.active), // new
+          admin: String(res.data.data.admin) // new
         })
       })
       .catch((error) => {
@@ -61,6 +65,14 @@ class UserStatus extends Component {
           <li>
             <strong>Username:</strong> {this.state.username}
           </li>
+          <li>
+            <strong>Active:</strong> {this.state.active}
+          </li>{' '}
+          {/* new */}
+          <li>
+            <strong>Admin:</strong> {this.state.admin}
+          </li>{' '}
+          {/* new */}
         </ul>
       </div>
     )
