@@ -330,7 +330,7 @@ class TestUserService(BaseTestCase):
             data = json.loads(response.data.decode())
             self.assertTrue(data['status'] == 'fail')
             self.assertTrue(
-                data['message'] == 'You do not have permission to do that.')
+                data['message'] == 'Insufficient permissions.')
             self.assertEqual(response.status_code, 401)
 
 
