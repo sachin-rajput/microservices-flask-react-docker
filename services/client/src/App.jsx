@@ -4,15 +4,14 @@ import axios from 'axios'
 import Cookies from 'universal-cookie'
 import moment from 'moment'
 
-const cookies = new Cookies()
-
 import UsersList from './components/UsersList'
-import AddUser from './components/AddUser'
 import About from './components/About'
 import NavBar from './components/NavBar'
 import Form from './components/Form'
 import Logout from './components/Logout'
 import UserStatus from './components/UserStatus'
+
+const cookies = new Cookies()
 
 class App extends Component {
   constructor() {

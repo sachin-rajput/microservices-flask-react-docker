@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Cookies from 'universal-cookie'
-const cookies = new Cookies()
 import { Link } from 'react-router-dom'
+
+const cookies = new Cookies()
 
 class UserStatus extends Component {
   constructor(props) {
