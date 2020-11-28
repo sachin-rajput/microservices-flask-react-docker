@@ -1,0 +1,22 @@
+{
+  "name": "test-driven-io",
+  "version": "1.0.0",
+  "description": "[![Build Status](https://travis-ci.com/sachin-rajput/microservices-flask-react-docker.svg?branch=main)](https://travis-ci.com/github/sachin-rajput/microservices-flask-react-docker)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sachin-rajput/microservices-flask-react-docker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sachin-rajput/microservices-flask-react-docker/issues"
+  },
+  "homepage": "https://github.com/sachin-rajput/microservices-flask-react-docker#readme",
+  "devDependencies": {
+    "cypress": "^6.0.0"
+  }
+}

@@ -3,3 +3,5 @@ env
 
 # Code Cov
 htmlcov
+
+node_modules
