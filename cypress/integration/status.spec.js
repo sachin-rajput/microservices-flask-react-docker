@@ -10,10 +10,10 @@ describe("Status", () => {
       .contains("You must be logged in to view this.")
       .get("a")
       .contains("User Status")
-      .should("not.be.visible")
+      .should("not.exist")
       .get("a")
       .contains("Log Out")
-      .should("not.be.visible")
+      .should("not.exist")
       .get("a")
       .contains("Register")
       .get("a")
@@ -56,9 +56,9 @@ describe("Status", () => {
       .contains("Log Out")
       .get("a")
       .contains("Register")
-      .should("not.be.visible")
+      .should("not.exist")
       .get("a")
       .contains("Log In")
-      .should("not.be.visible");
+      .should("not.exist");
   });
 });

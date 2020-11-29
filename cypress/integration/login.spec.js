@@ -18,7 +18,8 @@ describe("Login", () => {
       .get('input[name="password"]')
       .type("test")
       .get('input[type="submit"]')
-      .click();
+      .click()
+      .wait(100);
 
     // log a user out
     cy.get(".navbar-burger").click();
@@ -48,10 +49,10 @@ describe("Login", () => {
         .contains("Log Out")
         .get(".navbar-item")
         .contains("Log In")
-        .should("not.be.visible")
+        .should("not.exist")
         .get(".navbar-item")
         .contains("Register")
-        .should("not.be.visible");
+        .should("not.exist");
     });
 
     // log a user out
@@ -63,10 +64,10 @@ describe("Login", () => {
     cy.get(".navbar-menu").within(() => {
       cy.get(".navbar-item")
         .contains("User Status")
-        .should("not.be.visible")
+        .should("not.exist")
         .get(".navbar-item")
         .contains("Log Out")
-        .should("not.be.visible")
+        .should("not.exist")
         .get(".navbar-item")
         .contains("Log In")
         .get(".navbar-item")
