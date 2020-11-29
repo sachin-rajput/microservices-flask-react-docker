@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/sachin-rajput/microservices-flask-react-docker#readme",
   "devDependencies": {
-    "cypress": "^6.0.0"
+    "cypress": "^6.0.0",
+    "randomstring": "^1.1.5"
   }
 }

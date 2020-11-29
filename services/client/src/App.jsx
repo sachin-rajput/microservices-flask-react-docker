@@ -37,6 +37,10 @@ class App extends Component {
 
   componentDidMount() {
     this.getUsers()
+
+    if (cookies.get('authToken')) {
+      this.setState({ isAuthenticated: true })
+    }
   }
 
   getUsers() {

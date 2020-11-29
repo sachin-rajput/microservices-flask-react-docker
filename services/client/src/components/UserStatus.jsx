@@ -8,6 +8,9 @@ const cookies = new Cookies()
 class UserStatus extends Component {
   constructor(props) {
     super(props)
+
+    console.log(props)
+
     this.state = {
       email: '',
       id: '',
@@ -17,7 +20,7 @@ class UserStatus extends Component {
     }
   }
   componentDidMount() {
-    if (this.props.isAuthenticated) {
+    if (this.props.isAuthenticated || cookies.get('authToken')) {
       this.getUserStatus()
     }
   }
