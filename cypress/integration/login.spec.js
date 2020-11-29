@@ -18,7 +18,8 @@ describe("Login", () => {
       .get('input[name="password"]')
       .type("test")
       .get('input[type="submit"]')
-      .click();
+      .click()
+      .wait(400);
 
     // log a user out
     cy.get(".navbar-burger").click();
