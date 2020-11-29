@@ -63,10 +63,10 @@ describe("Login", () => {
     cy.get(".navbar-menu").within(() => {
       cy.get(".navbar-item")
         .contains("User Status")
-        .should("not.exist")
+        .should("not.be.visible")
         .get(".navbar-item")
         .contains("Log Out")
-        .should("not.exist")
+        .should("not.be.visible")
         .get(".navbar-item")
         .contains("Log In")
         .get(".navbar-item")

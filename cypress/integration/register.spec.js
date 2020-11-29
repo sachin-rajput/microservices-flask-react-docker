@@ -32,10 +32,10 @@ describe("Register", () => {
         .contains("Log Out")
         .get(".navbar-item")
         .contains("Log In")
-        .should("not.exist")
+        .should("not.be.visible")
         .get(".navbar-item")
         .contains("Register")
-        .should("not.exist");
+        .should("not.be.visible");
     });
   });
 });
