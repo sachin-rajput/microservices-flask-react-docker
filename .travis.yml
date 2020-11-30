@@ -18,7 +18,7 @@ before_install:
 
 before_script:
   - export REACT_APP_USERS_SERVICE_URL=http://localhost
-  - export NO_PROXY=undefined,localhost
+  - export SECRET_KEY=f0d41a61bc3cc5d79f5925c478c3ced8d3e2ab12c35ff231
   - npm ci
 
 script:
