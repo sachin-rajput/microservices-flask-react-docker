@@ -10,14 +10,14 @@ inspect() {
 }
 
 # run unit and integration tests
-docker-compose up -d --build
-docker-compose exec users python manage.py test
-inspect $? users
-docker-compose exec users flake8 project
-inspect $? users-lint
-docker-compose exec client npm run coverage
-inspect $? client
-docker-compose down
+# docker-compose up -d --build
+# docker-compose exec users python manage.py test
+# inspect $? users
+# docker-compose exec users flake8 project
+# inspect $? users-lint
+# docker-compose exec client npm run coverage
+# inspect $? client
+# docker-compose down
 
 # new
 # run e2e tests

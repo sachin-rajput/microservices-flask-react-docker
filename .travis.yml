@@ -18,8 +18,8 @@ before_install:
 
 before_script:
   - export REACT_APP_USERS_SERVICE_URL=http://localhost
-  - export NO_PROXY=undefined
-  - npm install
+  - export NO_PROXY=undefined,localhost
+  - npm ci
 
 script:
   - bash test.sh
