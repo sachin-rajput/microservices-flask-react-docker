@@ -10,6 +10,7 @@ import NavBar from './components/NavBar'
 import Form from './components/forms/Form'
 import Logout from './components/Logout'
 import UserStatus from './components/UserStatus'
+import Message from './components/Message'
 
 const cookies = new Cookies()
 
@@ -18,14 +19,15 @@ class App extends Component {
     super()
     this.state = {
       users: [],
-      username: '',
-      email: '',
       title: 'TestDriven.io',
-      isAuthenticated: false
+      isAuthenticated: false,
+      messageName: null, // new
+      messageType: null // new
     }
-    // this.addUser = this.addUser.bind(this)
     this.logoutUser = this.logoutUser.bind(this)
     this.loginUser = this.loginUser.bind(this)
+    this.createMessage = this.createMessage.bind(this)
+    this.removeMessage = this.removeMessage.bind(this)
   }
 
   componentDidMount() {
@@ -47,23 +49,6 @@ class App extends Component {
       })
   }
 
-  // addUser(event) {
-  //   event.preventDefault()
-  //   const data = {
-  //     username: this.state.username,
-  //     email: this.state.email
-  //   }
-  //   axios
-  //     .post(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`, data)
-  //     .then((res) => {
-  //       this.getUsers()
-  //       this.setState({ username: '', email: '' })
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  // }
-
   logoutUser() {
     cookies.remove('authToken')
     this.setState({ isAuthenticated: false })
@@ -76,6 +61,25 @@ class App extends Component {
     })
     this.setState({ isAuthenticated: true })
     this.getUsers()
+    this.createMessage('Welcome!', 'success') // new
+  }
+
+  createMessage(name = 'Sanity Check', type = 'success') {
+    this.setState({
+      messageName: name,
+      messageType: type
+    })
+    // new
+    setTimeout(() => {
+      this.removeMessage()
+    }, 3000)
+  }
+
+  removeMessage() {
+    this.setState({
+      messageName: null,
+      messageType: null
+    })
   }
 
   render() {
@@ -85,10 +89,18 @@ class App extends Component {
         <NavBar title={this.state.title} isAuthenticated={isAuthenticated} />
         <section className="section">
           <div className="container">
+            {/* new */}
+            {this.state.messageName && this.state.messageType && (
+              <Message
+                messageName={this.state.messageName}
+                messageType={this.state.messageType}
+                removeMessage={this.removeMessage} // new
+              />
+            )}
             <div className="columns">
               <div className="column is-half">
                 <br />
-                {/* new */}
+
                 <Switch>
                   <Route
                     exact
@@ -104,6 +116,7 @@ class App extends Component {
                         formType={'Register'}
                         isAuthenticated={this.state.isAuthenticated}
                         loginUser={this.loginUser}
+                        createMessage={this.createMessage} // new
                       />
                     )}
                   />
@@ -115,6 +128,7 @@ class App extends Component {
                         formType={'Login'}
                         isAuthenticated={this.state.isAuthenticated}
                         loginUser={this.loginUser}
+                        createMessage={this.createMessage} // new
                       />
                     )}
                   />
