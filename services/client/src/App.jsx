@@ -7,7 +7,7 @@ import moment from 'moment'
 import UsersList from './components/UsersList'
 import About from './components/About'
 import NavBar from './components/NavBar'
-import Form from './components/Form'
+import Form from './components/forms/Form'
 import Logout from './components/Logout'
 import UserStatus from './components/UserStatus'
 
