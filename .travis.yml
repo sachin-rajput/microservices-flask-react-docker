@@ -33,7 +33,7 @@ before_script:
   - npm install
 
 script:
-  - bash test.sh
+  - bash test-ci.sh $TRAVIS_BRANCH
 
 # new
 after_success:
