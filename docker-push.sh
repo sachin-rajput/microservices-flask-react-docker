@@ -28,22 +28,22 @@ then
   then
     # users
     docker pull $REPO/$USERS:$TRAVIS_BRANCH
-    docker build --cache-from $REPO/$USERS:$TRAVIS_BRANCH -t $USERS:$COMMIT -f Dockerfile-$DOCKER_ENV  # new
+    docker build --cache-from $REPO/$USERS:$TRAVIS_BRANCH -t $USERS:$COMMIT -f Dockerfile-$DOCKER_ENV .# new
     docker tag $USERS:$COMMIT $REPO/$USERS:$TAG
     docker push $REPO/$USERS:$TAG
     # users db
     docker pull $REPO/$USERS_DB:$TRAVIS_BRANCH
-    docker build --cache-from $REPO/$USERS_DB:$TRAVIS_BRANCH -t $USERS_DB:$COMMIT -f Dockerfile
+    docker build --cache-from $REPO/$USERS_DB:$TRAVIS_BRANCH -t $USERS_DB:$COMMIT -f Dockerfile .
     docker tag $USERS_DB:$COMMIT $REPO/$USERS_DB:$TAG
     docker push $REPO/$USERS_DB:$TAG
     # client
     docker pull $REPO/$CLIENT:$TRAVIS_BRANCH
-    docker build --cache-from $REPO/$CLIENT:$TRAVIS_BRANCH -t $CLIENT:$COMMIT -f Dockerfile-$DOCKER_ENV --build-arg REACT_APP_USERS_SERVICE_URL=TBD # new
+    docker build --cache-from $REPO/$CLIENT:$TRAVIS_BRANCH -t $CLIENT:$COMMIT -f Dockerfile-$DOCKER_ENV --build-arg REACT_APP_USERS_SERVICE_URL=TBD . # new
     docker tag $CLIENT:$COMMIT $REPO/$CLIENT:$TAG
     docker push $REPO/$CLIENT:$TAG
     # swagger
     docker pull $REPO/$SWAGGER:$TRAVIS_BRANCH
-    docker build --cache-from $REPO/$SWAGGER:$TRAVIS_BRANCH -t $SWAGGER:$COMMIT -f Dockerfile-$DOCKER_ENV  # new
+    docker build --cache-from $REPO/$SWAGGER:$TRAVIS_BRANCH -t $SWAGGER:$COMMIT -f Dockerfile-$DOCKER_ENV  . # new
     docker tag $SWAGGER:$COMMIT $REPO/$SWAGGER:$TAG
     docker push $REPO/$SWAGGER:$TAG
   fi
