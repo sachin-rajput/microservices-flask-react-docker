@@ -6,6 +6,8 @@ then
   # new
   if [[ "$TRAVIS_BRANCH" == "staging" ]]; then
     export DOCKER_ENV=stage
+    # new
+    export REACT_APP_USERS_SERVICE_URL="http://testdriven-staging-alb-406204066.us-west-1.elb.amazonaws.com"
   elif [[ "$TRAVIS_BRANCH" == "production" ]]; then
     export DOCKER_ENV=prod
   fi
@@ -51,7 +53,7 @@ then
     # client
     cd services/client
     docker pull $REPO/$CLIENT:$TRAVIS_BRANCH
-    docker build --cache-from $REPO/$CLIENT:$TRAVIS_BRANCH -t $CLIENT:$COMMIT -f Dockerfile-$DOCKER_ENV --build-arg REACT_APP_USERS_SERVICE_URL=TBD . # new
+    docker build --cache-from $REPO/$CLIENT:$TRAVIS_BRANCH -t $CLIENT:$COMMIT -f Dockerfile-$DOCKER_ENV --build-arg REACT_APP_USERS_SERVICE_URL=$REACT_APP_USERS_SERVICE_URL . # new
     docker tag $CLIENT:$COMMIT $REPO/$CLIENT:$TAG
     docker tag $CLIENT:$COMMIT $REPO/$CLIENT:$COMMIT
     docker tag $CLIENT:$COMMIT $REPO/$CLIENT:latest
