@@ -12,6 +12,7 @@ import Logout from './components/Logout'
 import UserStatus from './components/UserStatus'
 import Message from './components/Message'
 import Footer from './components/Footer'
+import Exercises from './components/Exercises'
 
 const cookies = new Cookies()
 
@@ -107,7 +108,7 @@ class App extends Component {
                     exact
                     path="/"
                     render={() => (
-                      <p>Something</p> // new
+                      <Exercises isAuthenticated={this.state.isAuthenticated} /> // new
                     )}
                   />
                   <Route
