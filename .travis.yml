@@ -38,4 +38,5 @@ script:
 # new
 after_success:
   - bash ./docker-push.sh
-  - bash ./docker-deploy-stage.sh # new
+  - bash ./docker-deploy-stage.sh
+  - bash ./docker-deploy-prod.sh # new

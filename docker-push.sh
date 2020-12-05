@@ -3,13 +3,14 @@
 if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]
 then
 
-  # new
   if [[ "$TRAVIS_BRANCH" == "staging" ]]; then
     export DOCKER_ENV=stage
-    # new
     export REACT_APP_USERS_SERVICE_URL="http://testdriven-staging-alb-406204066.us-west-1.elb.amazonaws.com"
   elif [[ "$TRAVIS_BRANCH" == "production" ]]; then
     export DOCKER_ENV=prod
+    export REACT_APP_USERS_SERVICE_URL="http://testdriven-production-alb-919309532.us-west-1.elb.amazonaws.com"
+    export DATABASE_URL="$AWS_RDS_URI"  # new
+    export SECRET_KEY="$PRODUCTION_SECRET_KEY"  # new
   fi
 
   if [ "$TRAVIS_BRANCH" == "staging" ] || \
