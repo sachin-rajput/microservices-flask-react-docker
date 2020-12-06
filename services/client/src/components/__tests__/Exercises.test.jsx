@@ -1,11 +1,35 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 import renderer from 'react-test-renderer'
-
 import Exercises from '../Exercises'
+import AceEditor from 'react-ace'
+jest.mock('react-ace')
+
+// new
+const exercises = [
+  {
+    id: 0,
+    body: `Define a function called sum that takes
+    two integers as arguments and returns their sum.`
+  },
+  {
+    id: 1,
+    body: `Define a function called reverse that takes a string
+    as an argument and returns the string in reversed order.`
+  },
+  {
+    id: 2,
+    body: `Define a function called factorial that takes a random
+    number as an argument and then returns the factorial of that
+    given number.`
+  }
+]
 
 test('Exercises renders properly when not authenticated', () => {
+  const onDidMount = jest.fn()
+  Exercises.prototype.componentDidMount = onDidMount
   const wrapper = shallow(<Exercises isAuthenticated={false} />)
+  wrapper.setState({ exercises: exercises })
   const heading = wrapper.find('h5')
   expect(heading.length).toBe(1)
   const alert = wrapper.find('.notification')
@@ -17,7 +41,10 @@ test('Exercises renders properly when not authenticated', () => {
 })
 
 test('Exercises renders properly when authenticated', () => {
+  const onDidMount = jest.fn()
+  Exercises.prototype.componentDidMount = onDidMount
   const wrapper = shallow(<Exercises isAuthenticated={true} />)
+  wrapper.setState({ exercises: exercises })
   const heading = wrapper.find('h5')
   expect(heading.length).toBe(1)
   const alert = wrapper.find('.notification')
@@ -25,6 +52,8 @@ test('Exercises renders properly when authenticated', () => {
 })
 
 test('Exercises renders a snapshot properly', () => {
+  const onDidMount = jest.fn()
+  Exercises.prototype.componentDidMount = exercises
   const tree = renderer.create(<Exercises />).toJSON()
   expect(tree).toMatchSnapshot()
 })

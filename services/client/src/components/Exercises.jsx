@@ -3,15 +3,20 @@ import AceEditor from 'react-ace'
 
 import 'ace-builds/src-noconflict/mode-python'
 import 'ace-builds/src-noconflict/theme-solarized_dark'
+import axios from 'axios'
 
 class Exercises extends Component {
   constructor(props) {
     super(props)
     this.state = {
       exercises: [],
-      // new
+
       editor: {
-        value: '# Enter your code here.'
+        value: '# Enter your code here.',
+        button: { isDisabled: false },
+        showGrading: false,
+        showCorrect: false,
+        showIncorrect: false
       }
     }
 
@@ -25,37 +30,52 @@ class Exercises extends Component {
 
   submitExercise(event) {
     event.preventDefault()
-    console.log(this.state.editor.value)
+    const newState = this.state.editor
+    newState.showGrading = true
+    newState.button.isDisabled = true
+    newState.showCorrect = false
+    newState.showIncorrect = false
+    this.setState(newState)
+    const data = { answer: this.state.editor.value }
+    const url = `${process.env.REACT_APP_API_GATEWAY_URL}/execute`
+    axios
+      .post(url, data)
+      .then((res) => {
+        console.log(res)
+        newState.showGrading = false
+        newState.button.isDisabled = false
+
+        if (res.data) {
+          newState.showCorrect = true
+        }
+        if (!res.data) {
+          newState.showIncorrect = true
+        }
+        this.setState(newState)
+      })
+      .catch((err) => {
+        newState.showGrading = false
+        newState.button.isDisabled = false
+        this.setState(newState)
+        console.log(err)
+      })
   }
 
   getExercises() {
-    const exercises = [
-      {
-        id: 0,
-        body: `Define a function called sum that takes
-        two integers as arguments and returns their sum.`
-      },
-      {
-        id: 1,
-        body: `Define a function called reverse that takes a string
-        as an argument and returns the string in reversed order.`
-      },
-      {
-        id: 2,
-        body: `Define a function called factorial that takes a random
-        number as an argument and then returns the factorial of that
-        given number.`
-      }
-    ]
-    this.setState({ exercises: exercises })
+    axios
+      .get(`${process.env.REACT_APP_EXERCISES_SERVICE_URL}/exercises`)
+      .then((res) => {
+        this.setState({ exercises: res.data.data.exercises })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   onChange(value) {
-    this.setState({
-      editor: {
-        value: value
-      }
-    })
+    const newState = this.state.editor
+    newState.value = value
+    this.setState(newState)
   }
 
   render() {
@@ -93,12 +113,39 @@ class Exercises extends Component {
               onChange={this.onChange}
             />
             {this.props.isAuthenticated && (
-              <button
-                className="button is-primary"
-                onClick={this.submitExercise}
-              >
-                Run Code
-              </button>
+              <div>
+                <button
+                  className="button is-primary"
+                  onClick={this.submitExercise}
+                  disabled={this.state.editor.button.isDisabled}
+                >
+                  Run Code
+                </button>
+                {this.state.editor.showGrading && (
+                  <h5 className="title is-5">
+                    <span className="icon is-large">
+                      <i className="fas fa-spinner fa-pulse"></i>
+                    </span>
+                    <span className="grade-text">Grading...</span>
+                  </h5>
+                )}
+                {this.state.editor.showCorrect && (
+                  <h5 className="title is-5">
+                    <span className="icon is-large">
+                      <i className="fas fa-check"></i>
+                    </span>
+                    <span className="grade-text">Correct!</span>
+                  </h5>
+                )}
+                {this.state.editor.showIncorrect && (
+                  <h5 className="title is-5">
+                    <span className="icon is-large">
+                      <i className="fas fa-times"></i>
+                    </span>
+                    <span className="grade-text">Incorrect!</span>
+                  </h5>
+                )}
+              </div>
             )}
             <br />
             <br />
