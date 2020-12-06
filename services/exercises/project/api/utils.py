@@ -54,7 +54,14 @@ def authenticate_restful(f):
 
 def ensure_authenticated(token):
     if current_app.config['TESTING']:
-        return True
+        # new
+        test_response = {
+            'data': {'id': 998877},
+            'status': 'success',
+            'admin': True
+        }
+        # new
+        return test_response
     url = '{0}/auth/status'.format(current_app.config['USERS_SERVICE_URL'])
     bearer = 'Bearer {0}'.format(token)
     headers = {'Authorization': bearer}
