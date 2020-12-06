@@ -9,6 +9,8 @@ services:
       args:
         - NODE_ENV=production
         - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
+        - REACT_APP_API_GATEWAY_URL=${REACT_APP_API_GATEWAY_URL}
+        - REACT_APP_EXERCISES_SERVICE_URL=${REACT_APP_EXERCISES_SERVICE_URL}
     ports:
       - "3007:80"
     depends_on:
@@ -22,14 +24,14 @@ services:
       - 5001:5000
     environment:
       - FLASK_ENV=production
-      - APP_SETTINGS=project.config.DevelopmentConfig # new
-      - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_dev # new
-      - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_test # new
-      - SECRET_KEY=${SECRET_KEY} # new
-    depends_on: # new
+      - APP_SETTINGS=project.config.DevelopmentConfig
+      - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_dev
+      - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_test
+      - SECRET_KEY=${SECRET_KEY}
+    depends_on:
       - users-db
 
-  users-db: # new
+  users-db:
     build:
       context: ./services/users/project/db
       dockerfile: Dockerfile

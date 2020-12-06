@@ -11,6 +11,8 @@ import Form from './components/forms/Form'
 import Logout from './components/Logout'
 import UserStatus from './components/UserStatus'
 import Message from './components/Message'
+import Footer from './components/Footer'
+import Exercises from './components/Exercises'
 
 const cookies = new Cookies()
 
@@ -105,6 +107,13 @@ class App extends Component {
                   <Route
                     exact
                     path="/"
+                    render={() => (
+                      <Exercises isAuthenticated={this.state.isAuthenticated} /> // new
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/all-users"
                     render={() => <UsersList users={this.state.users} />}
                   />
                   <Route exact path="/about" component={About} />
@@ -156,6 +165,7 @@ class App extends Component {
             </div>
           </div>
         </section>
+        <Footer />
       </div>
     )
   }

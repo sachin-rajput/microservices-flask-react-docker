@@ -18,6 +18,16 @@ $ source env/bin/activate
 
 ```
 
+### For errors:
+
+```
+cannot import name 'cached_property' from 'werkzeug'
+```
+
+Update in requirements.txt:
+
+Flask-Testing==0.8.0
+
 #### Run the app, to enable debug mode by setting the FLASK_ENV environment variable to development:
 
 ```
