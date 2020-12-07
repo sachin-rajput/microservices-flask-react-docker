@@ -39,8 +39,8 @@ then
 
       # users
       service="testdriven-users-prod-service"  # new
-      template="ecs_users_prod_taskdefinition.json"
-      task_template=$(cat "ecs/$template")
+      template="prod.json"
+      task_template=$(cat "ecs/taskdefinitions/users/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_RDS_URI $PRODUCTION_SECRET_KEY)
       echo "$task_def"
       register_definition
@@ -48,17 +48,26 @@ then
 
       # client
       service="testdriven-client-prod-service"  # new
-      template="ecs_client_prod_taskdefinition.json"
-      task_template=$(cat "ecs/$template")
+      template="prod.json"
+      task_template=$(cat "ecs/taskdefinitions/client/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID)
+      echo "$task_def"
+      register_definition
+      update_service  # new
+
+      # exercises
+      service="testdriven-exercises-prod-service"  # new
+      template="prod.json"
+      task_template=$(cat "ecs/taskdefinitions/exercises/$template")
+      task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_RDS_EXERCISES_URI)
       echo "$task_def"
       register_definition
       update_service  # new
 
       # swagger
       service="testdriven-swagger-prod-service"  # new
-      template="ecs_swagger_prod_taskdefinition.json"
-      task_template=$(cat "ecs/$template")
+      template="prod.json"
+      task_template=$(cat "ecs/taskdefinitions/swagger/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID)
       echo "$task_def"
       register_definition

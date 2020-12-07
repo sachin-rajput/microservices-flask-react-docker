@@ -40,19 +40,27 @@ then
       # users
       # new
       service="testdriven-users-stage-service"
-      template="ecs_users_stage_taskdefinition.json"
-      task_template=$(cat "ecs/$template")
+      template="stage.json"
+      task_template=$(cat "ecs/taskdefinitions/users/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_ACCOUNT_ID)
       echo "$task_def"
       register_definition
       # new
       update_service
 
+      # exercises
+      service="testdriven-exercises-stage-service"
+      template="stage.json"
+      task_template=$(cat "ecs/taskdefinitions/exercises/$template")
+      task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_ACCOUNT_ID)
+      echo "$task_def"
+      register_definition
+
       # client
       # new
       service="testdriven-client-stage-service"
-      template="ecs_client_stage_taskdefinition.json"
-      task_template=$(cat "ecs/$template")
+      template="stage.json"
+      task_template=$(cat "ecs/taskdefinitions/client/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID)
       echo "$task_def"
       register_definition
@@ -62,8 +70,8 @@ then
       # swagger
       # new
       service="testdriven-swagger-stage-service"
-      template="ecs_swagger_stage_taskdefinition.json"
-      task_template=$(cat "ecs/$template")
+      template="stage.json"
+      task_template=$(cat "ecs/taskdefinitions/swagger/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID)
       echo "$task_def"
       register_definition
