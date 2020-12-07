@@ -70,6 +70,7 @@ class ExerciseList(Resource):
 
 api.add_resource(ExerciseList, '/exercises')
 
+
 @exercises_blueprint.route('/exercises/ping', methods=['GET'])
 def ping_pong():
     return jsonify({
