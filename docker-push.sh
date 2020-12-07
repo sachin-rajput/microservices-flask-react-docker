@@ -6,9 +6,11 @@ then
   if [[ "$TRAVIS_BRANCH" == "staging" ]]; then
     export DOCKER_ENV=stage
     export REACT_APP_USERS_SERVICE_URL="http://testdriven-staging-alb-406204066.us-west-1.elb.amazonaws.com"
+    export REACT_APP_EXERCISES_SERVICE_URL="http://testdriven-staging-alb-406204066.us-west-1.elb.amazonaws.com"  # new
   elif [[ "$TRAVIS_BRANCH" == "production" ]]; then
     export DOCKER_ENV=prod
     export REACT_APP_USERS_SERVICE_URL="http://testdriven-production-alb-919309532.us-west-1.elb.amazonaws.com"
+    export REACT_APP_EXERCISES_SERVICE_URL="http://testdriven-production-alb-919309532.us-west-1.elb.amazonaws.com"  # new
     export DATABASE_URL="$AWS_RDS_URI"  # new
     export SECRET_KEY="$PRODUCTION_SECRET_KEY"  # new
   fi
@@ -54,7 +56,7 @@ then
     # client
     cd services/client
     docker pull $REPO/$CLIENT:$TRAVIS_BRANCH
-    docker build --cache-from $REPO/$CLIENT:$TRAVIS_BRANCH -t $CLIENT:$COMMIT -f Dockerfile-$DOCKER_ENV --build-arg REACT_APP_USERS_SERVICE_URL=$REACT_APP_USERS_SERVICE_URL . # new
+    docker build --cache-from $REPO/$CLIENT:$TRAVIS_BRANCH -t $CLIENT:$COMMIT -f Dockerfile-$DOCKER_ENV --build-arg REACT_APP_USERS_SERVICE_URL=$REACT_APP_USERS_SERVICE_URL --build-arg REACT_APP_EXERCISES_SERVICE_URL=$REACT_APP_EXERCISES_SERVICE_URL --build-arg REACT_APP_API_GATEWAY_URL=$REACT_APP_API_GATEWAY_URL  # new
     docker tag $CLIENT:$COMMIT $REPO/$CLIENT:$TAG
     docker tag $CLIENT:$COMMIT $REPO/$CLIENT:$COMMIT
     docker tag $CLIENT:$COMMIT $REPO/$CLIENT:latest
@@ -72,6 +74,26 @@ then
     docker push $REPO/$SWAGGER:$TAG
     docker push $REPO/$SWAGGER:$COMMIT
     docker push $REPO/$SWAGGER:latest
+    cd ../../
+    # exercises
+    cd services/exercises
+    docker build $EXERCISES_REPO -t $EXERCISES:$COMMIT -f Dockerfile-$DOCKER_ENV  # new
+    docker tag $EXERCISES:$COMMIT $REPO/$EXERCISES:$TAG  # new
+    docker tag $EXERCISES:$COMMIT $REPO/$EXERCISES:$COMMIT
+    docker tag $EXERCISES:$COMMIT $REPO/$EXERCISES:latest
+    docker push $REPO/$EXERCISES:$TAG
+    docker push $REPO/$EXERCISES:$COMMIT
+    docker push $REPO/$EXERCISES:latest
+    cd ../../
+    # exercises db
+    cd services/exercises/project/db
+    docker build $EXERCISES_DB_REPO -t $EXERCISES_DB:$COMMIT -f Dockerfile  # new
+    docker tag $EXERCISES_DB:$COMMIT $REPO/$EXERCISES_DB:$TAG  # new
+    docker tag $EXERCISES_DB:$COMMIT $REPO/$EXERCISES_DB:$COMMIT
+    docker tag $EXERCISES_DB:$COMMIT $REPO/$EXERCISES_DB:latest
+    docker push $REPO/$EXERCISES_DB:$TAG
+    docker push $REPO/$EXERCISES_DB:$COMMIT
+    docker push $REPO/$EXERCISES_DB:latest
     cd ../../
   fi
 fi
